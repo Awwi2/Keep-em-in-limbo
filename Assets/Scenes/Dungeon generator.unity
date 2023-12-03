@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 239509842150511240, guid: a5a82b5aa24fa394f885ccd17f23ddec, type: 3}
-  mazeSize: {x: 1000, y: 1000}
+  mazeSize: {x: 10, y: 10}
 --- !u!4 &491815089
 Transform:
   m_ObjectHideFlags: 0
