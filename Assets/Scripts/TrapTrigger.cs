@@ -11,10 +11,10 @@ public class TrapTrigger : MonoBehaviour
     // Start is called before the first frame update
 
     // This function is called when another collider enters this object's collider
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log("Hit me");
-        if (collision.collider.tag == "player") // Check if the player collides with the trigger
+        if (collider.tag == "player") // Check if the player collides with the trigger
         {
             // Handle collision here
             Debug.Log("Collision detected with the player, now letting the ground crumble");
