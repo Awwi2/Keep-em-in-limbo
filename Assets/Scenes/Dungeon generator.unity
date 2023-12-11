@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 491815089}
   - component: {fileID: 491815088}
+  - component: {fileID: 491815090}
   m_Layer: 0
   m_Name: Maze Generator
   m_TagString: Untagged
@@ -147,7 +148,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491815087}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3781f909da7e2f346888d6b936ace29a, type: 3}
   m_Name: 
@@ -169,6 +170,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &491815090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491815087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364fe76ac84ee0248a048a96b4119cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mazeSize: {x: 2, y: 2}
+  roomWidth: 26
+  roomHeight: 16
 --- !u!1 &1313228543
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +246,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.039483
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
