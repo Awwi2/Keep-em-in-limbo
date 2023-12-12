@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Node
@@ -8,6 +9,8 @@ public class Node
     public bool down = false;
     public bool left = false;
     public bool right = false;
+    public int x = 0;
+    public int y = 0;
 }
 
 public class NonVisualMazeGenerator : MonoBehaviour
@@ -50,16 +53,8 @@ public class NonVisualMazeGenerator : MonoBehaviour
         ULR = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/ULR"));
         UR = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/UR"));
 
-        Debug.Log(D);
         List<Node> nodes = GenerateMaze(mazeSize);
-        for (int x = 0; x < mazeSize.x * mazeSize.y; x++)
-        {
-            Debug.Log(nodes[x].up);
-            Debug.Log(nodes[x].down);
-            Debug.Log(nodes[x].left);
-            Debug.Log(nodes[x].right);
-        }
-        BuildMaze(nodes);
+        BuildMazeFlo(nodes);
     }
 
     List<Node> GenerateMaze(Vector2Int size)
@@ -71,14 +66,16 @@ public class NonVisualMazeGenerator : MonoBehaviour
         {
             for (int y = 0; y < size.y; y++)
             {
-                nodes.Add(new Node()) ;
+                Node newNode = new Node();
+                newNode.x = x;
+                newNode.y = y;
+                nodes.Add(newNode);
             }
         }
         List<Node> currentPath = new List<Node>();
         List<Node> completedNodes = new List<Node>();
 
         currentPath.Add(nodes[Random.Range(0,nodes.Count)]);
-        Debug.Log(nodes.IndexOf(currentPath[0]));
 
         while (completedNodes.Count < nodes.Count)
         {
@@ -136,13 +133,6 @@ public class NonVisualMazeGenerator : MonoBehaviour
                 int chosenDirection = Random.Range(0, possibleDirections.Count);
                 Node chosenNode = nodes[possibleNextNodes[chosenDirection]];
 
-                for (int i = 0; i < possibleDirections.Count; i++)
-                {
-                    Debug.Log(possibleDirections[i]);
-                }
-                Debug.Log(possibleDirections);
-                Debug.Log(nodes.IndexOf(currentPath[0]));
-
                 switch (possibleDirections[chosenDirection])
                 {
                     case 1:
@@ -178,6 +168,26 @@ public class NonVisualMazeGenerator : MonoBehaviour
     void BuildMaze(List<Node> nodes)
     {
         GameObject prefab;
+        //sort nodes
+        List<Node> sortedNodes = new List<Node>();
+        List<Node> tempYCollection = new List<Node>();
+        for (int y = 0; y < nodes.Count; y++)
+        {
+            foreach (Node N in nodes)
+            {
+                if (N.y == y)
+                {
+                    tempYCollection.Add(N);
+                    tempYCollection.Sort((a, b) => a.x.CompareTo(b.x)); //Fancy
+                    foreach (Node N2 in tempYCollection)
+                    {
+                        sortedNodes.Add(N2);
+                    }
+                }
+            }
+            tempYCollection.Clear();
+        }
+        nodes = sortedNodes;
         for (int x = 0; x < mazeSize.x; x++)
         {
             for (int y = 0; y < mazeSize.y; y++)
@@ -272,6 +282,40 @@ public class NonVisualMazeGenerator : MonoBehaviour
                 Vector3 nodePos = new Vector3(x * roomWidth, y * -roomHeight, 0);
                 Instantiate(prefab, nodePos, Quaternion.identity, transform);
             }
+        }
+    }
+    void BuildMazeFlo(List<Node> n)
+    {
+
+        GameObject prefab = UDLR[0];
+        string udlr = "";
+        foreach (Node N in n)
+        {
+            if (N.up) {udlr = "U"; }
+            if (N.down) {udlr += "D"; }
+            if (N.left) {udlr += "L"; }
+            if (N.right) {udlr += "R"; }
+            
+            if (udlr == "U") { prefab = U[Random.Range(0, U.Count - 1)]; }
+            if (udlr == "D") { prefab = D[Random.Range(0, D.Count - 1)]; }
+            if (udlr == "L") { prefab = L[Random.Range(0, L.Count - 1)]; }
+            if (udlr == "R") { prefab = R[Random.Range(0, R.Count - 1)]; }
+            if (udlr == "UD") { prefab = UD[Random.Range(0, UD.Count - 1)]; }
+            if (udlr == "UL") { prefab = UL[Random.Range(0, UL.Count - 1)]; }
+            if (udlr == "UR") { prefab = UR[Random.Range(0, UR.Count - 1)]; }
+            if (udlr == "DL") { prefab = DL[Random.Range(0, DL.Count - 1)]; }
+            if (udlr == "DR") { prefab = DR[Random.Range(0, DR.Count - 1)]; }
+            if (udlr == "LR") { prefab = LR[Random.Range(0, LR.Count - 1)]; }
+            if (udlr == "UDL") { prefab = UDL[Random.Range(0, UDL.Count - 1)]; }
+            if (udlr == "UDR") { prefab = UDR[Random.Range(0, UDR.Count - 1)]; }
+            if (udlr == "ULR") { prefab = ULR[Random.Range(0, ULR.Count - 1)]; }
+            if (udlr == "DLR") { prefab = DLR[Random.Range(0, DLR.Count - 1)]; }
+            if (udlr == "UDLR") { prefab = UDLR[Random.Range(0, UDLR.Count - 1)]; }
+            udlr = "";
+
+            Vector3 nodePos = new Vector3(N.x * -roomWidth, N.y * roomHeight, 0);
+            Instantiate(prefab, nodePos, Quaternion.identity, transform);
+
         }
     }
 }

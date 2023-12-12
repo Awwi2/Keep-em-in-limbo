@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364fe76ac84ee0248a048a96b4119cf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeSize: {x: 2, y: 2}
+  mazeSize: {x: 15, y: 15}
   roomWidth: 26
   roomHeight: 16
 --- !u!1 &1313228543
