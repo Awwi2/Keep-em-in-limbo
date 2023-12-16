@@ -18,6 +18,7 @@ public class NonVisualMazeGenerator : MonoBehaviour
     [SerializeField] Vector2Int mazeSize;
     [SerializeField] float roomWidth;
     [SerializeField] float roomHeight;
+    [SerializeField] GameObject camTrigger;
 
     List<GameObject> D;
     List<GameObject> DL;
@@ -165,6 +166,7 @@ public class NonVisualMazeGenerator : MonoBehaviour
         return nodes;
     }
 
+    /*
     void BuildMaze(List<Node> nodes)
     {
         GameObject prefab;
@@ -284,6 +286,8 @@ public class NonVisualMazeGenerator : MonoBehaviour
             }
         }
     }
+    */
+
     void BuildMazeFlo(List<Node> n)
     {
 
@@ -297,25 +301,25 @@ public class NonVisualMazeGenerator : MonoBehaviour
             if (N.right) {udlr += "R"; }
             
             if (udlr == "U") { prefab = U[Random.Range(0, U.Count - 1)]; }
-            if (udlr == "D") { prefab = D[Random.Range(0, D.Count - 1)]; }
-            if (udlr == "L") { prefab = L[Random.Range(0, L.Count - 1)]; }
-            if (udlr == "R") { prefab = R[Random.Range(0, R.Count - 1)]; }
-            if (udlr == "UD") { prefab = UD[Random.Range(0, UD.Count - 1)]; }
-            if (udlr == "UL") { prefab = UL[Random.Range(0, UL.Count - 1)]; }
-            if (udlr == "UR") { prefab = UR[Random.Range(0, UR.Count - 1)]; }
-            if (udlr == "DL") { prefab = DL[Random.Range(0, DL.Count - 1)]; }
-            if (udlr == "DR") { prefab = DR[Random.Range(0, DR.Count - 1)]; }
-            if (udlr == "LR") { prefab = LR[Random.Range(0, LR.Count - 1)]; }
-            if (udlr == "UDL") { prefab = UDL[Random.Range(0, UDL.Count - 1)]; }
-            if (udlr == "UDR") { prefab = UDR[Random.Range(0, UDR.Count - 1)]; }
-            if (udlr == "ULR") { prefab = ULR[Random.Range(0, ULR.Count - 1)]; }
-            if (udlr == "DLR") { prefab = DLR[Random.Range(0, DLR.Count - 1)]; }
-            if (udlr == "UDLR") { prefab = UDLR[Random.Range(0, UDLR.Count - 1)]; }
+            else if (udlr == "D") { prefab = D[Random.Range(0, D.Count - 1)]; }
+            else if (udlr == "L") { prefab = L[Random.Range(0, L.Count - 1)]; }
+            else if (udlr == "R") { prefab = R[Random.Range(0, R.Count - 1)]; }
+            else if (udlr == "UD") { prefab = UD[Random.Range(0, UD.Count - 1)]; }
+            else if (udlr == "UL") { prefab = UL[Random.Range(0, UL.Count - 1)]; }
+            else if (udlr == "UR") { prefab = UR[Random.Range(0, UR.Count - 1)]; }
+            else if (udlr == "DL") { prefab = DL[Random.Range(0, DL.Count - 1)]; }
+            else if (udlr == "DR") { prefab = DR[Random.Range(0, DR.Count - 1)]; }
+            else if (udlr == "LR") { prefab = LR[Random.Range(0, LR.Count - 1)]; }
+            else if (udlr == "UDL") { prefab = UDL[Random.Range(0, UDL.Count - 1)]; }
+            else if (udlr == "UDR") { prefab = UDR[Random.Range(0, UDR.Count - 1)]; }
+            else if (udlr == "ULR") { prefab = ULR[Random.Range(0, ULR.Count - 1)]; }
+            else if (udlr == "DLR") { prefab = DLR[Random.Range(0, DLR.Count - 1)]; }
+            else if (udlr == "UDLR") { prefab = UDLR[Random.Range(0, UDLR.Count - 1)]; }
             udlr = "";
 
-            Vector3 nodePos = new Vector3(N.x * -roomWidth, N.y * roomHeight, 0);
+            Vector3 nodePos = new Vector3(N.x * (-roomWidth + 0.2f), N.y * (roomHeight - 0.2f), 0);
             Instantiate(prefab, nodePos, Quaternion.identity, transform);
-
+            Instantiate(camTrigger, nodePos, Quaternion.identity, transform);
         }
     }
 }
