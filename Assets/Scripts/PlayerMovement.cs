@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public int health = 3;
 
     public Rigidbody2D rb;
 
@@ -15,7 +16,10 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        
+        if( health <= 0)
+        {
+            Debug.Log("U ded!");
+        }
     }
 
     private void FixedUpdate()
