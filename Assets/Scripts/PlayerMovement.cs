@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public int health = 3;
     public Rigidbody2D rb;
     private Renderer rend;
+    [SerializeField] BoxCollider2D dashcollider;
 
     Vector2 movement;
 
@@ -40,8 +41,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space was pressed!");
-            if (dashCounter <=0 && dashCounter <= 0)
+            if (dashCounter <=0 && dashCoolCounter <= 0)
             {
+                dashcollider.enabled = true;
                 Debug.Log("Now dashing!");
                 rend.material.color = Color.red;
                 activeMoveSpeed = dashSpeed;
@@ -56,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
             if (dashCounter <= 0)
             {
                 //Dash vorbei
+                dashcollider.enabled = false;
                 rend.material.color = Color.green;
                 activeMoveSpeed = moveSpeed;
                 dashCoolCounter = dashCooldown;
