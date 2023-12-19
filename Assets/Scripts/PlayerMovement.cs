@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         activeMoveSpeed = moveSpeed;
         rend = GetComponent<Renderer>();
+        rend.material.color = Color.green;
     }
 
     void Update()
@@ -36,6 +37,21 @@ public class PlayerMovement : MonoBehaviour
             movement.Normalize();
         }
         
+        if(movement.x > 0)
+        {
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        } else if (movement.x < 0)
+        {
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        if (movement != new Vector2(0,0))
+        {
+            gameObject.GetComponent<Animator>().SetBool("Walking",true);
+        } else
+        {
+            gameObject.GetComponent<Animator>().SetBool("Walking", false);
+        }
 
         rb.velocity = movement * activeMoveSpeed;
         if (Input.GetKeyDown(KeyCode.Space))
@@ -45,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 dashcollider.enabled = true;
                 Debug.Log("Now dashing!");
-                rend.material.color = Color.red;
+                rend.material.color = new Color(1f, 0.5f, 0);
                 activeMoveSpeed = dashSpeed;
                 dashCounter = dashLength;
             }
@@ -59,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 //Dash vorbei
                 dashcollider.enabled = false;
-                rend.material.color = Color.green;
                 activeMoveSpeed = moveSpeed;
                 dashCoolCounter = dashCooldown;
             }
@@ -67,6 +82,9 @@ public class PlayerMovement : MonoBehaviour
         if (dashCoolCounter > 0)
         {
             dashCoolCounter -= Time.deltaTime;
+        } else if (dashCoolCounter <= 0 && dashCounter <= 0)
+        {
+            rend.material.color = Color.green;
         }
         if( health <= 0)
         {
