@@ -75,15 +75,17 @@ public class PlayerMovement : MonoBehaviour
             {
                 //Dash vorbei
                 dashcollider.enabled = false;
-                activeMoveSpeed = moveSpeed;
+                activeMoveSpeed = moveSpeed * 0.75f;
                 dashCoolCounter = dashCooldown;
             }
         }
         if (dashCoolCounter > 0)
         {
             dashCoolCounter -= Time.deltaTime;
-        } else if (dashCoolCounter <= 0 && dashCounter <= 0)
+        } 
+        else if (dashCoolCounter <= 0 && dashCounter <= 0)
         {
+            activeMoveSpeed = moveSpeed;
             rend.material.color = Color.green;
         }
         if( health <= 0)
