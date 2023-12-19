@@ -11,13 +11,14 @@ public class EnemyBehaviour : MonoBehaviour
     private GameObject player;
     private Transform playerTrans;
     private bool isPlayerInRange;
-    public PlayerMovement playerMovement;
+    private PlayerMovement playerMovement;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("player"); // Assumes the player has the "Player" tag
         playerTrans = player.transform;
+        playerMovement = player.GetComponent<PlayerMovement>();
         isPlayerInRange = false;
         InvokeRepeating("CheckPlayerInRange", 0f, 0.5f); // Check for player in range every 0.5 seconds
     }
