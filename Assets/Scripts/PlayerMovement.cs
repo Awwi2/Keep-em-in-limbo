@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public int health = 3;
     public Rigidbody2D rb;
+    private Renderer rend;
 
     Vector2 movement;
 
@@ -16,20 +17,24 @@ public class PlayerMovement : MonoBehaviour
 
     public float dashLength = .5f, dashCooldown = 1f;
 
-    private float dashCounter;
+    public float dashCounter; //for access in other scripts this is public (only read)
     private float dashCoolCounter;
+
 
     private void Start()
     {
         activeMoveSpeed = moveSpeed;
+        rend = GetComponent<Renderer>();
     }
 
     void Update()
     {
-
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        movement.Normalize();
+        if (dashCounter <= 0f) { 
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+            movement.Normalize();
+        }
+        
 
         rb.velocity = movement * activeMoveSpeed;
         if (Input.GetKeyDown(KeyCode.Space))
@@ -37,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Space was pressed!");
             if (dashCounter <=0 && dashCounter <= 0)
             {
+                Debug.Log("Now dashing!");
+                rend.material.color = Color.red;
                 activeMoveSpeed = dashSpeed;
                 dashCounter = dashLength;
             }
@@ -48,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (dashCounter <= 0)
             {
+                //Dash vorbei
+                rend.material.color = Color.green;
                 activeMoveSpeed = moveSpeed;
                 dashCoolCounter = dashCooldown;
             }
