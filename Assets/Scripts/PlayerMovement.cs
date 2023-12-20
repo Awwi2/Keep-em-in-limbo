@@ -54,11 +54,10 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = movement * activeMoveSpeed;
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Space was pressed!");
             if (dashCounter <=0 && dashCoolCounter <= 0)
-            {
+            {   
+                //Player is dashing
                 dashcollider.enabled = true;
-                Debug.Log("Now dashing!");
                 rend.material.color = new Color(1f, 0.5f, 0);
                 activeMoveSpeed = dashSpeed;
                 dashCounter = dashLength;
@@ -91,10 +90,4 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("U ded!");
         }
     }
-    /*
-    private void FixedUpdate()
-    {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-    }
-    */
 }

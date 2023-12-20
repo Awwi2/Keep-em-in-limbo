@@ -33,6 +33,7 @@ public class EnemyTrigger : MonoBehaviour
             if (enemyNumber == 0)
             {
                 Destroy(doors);
+                Destroy(gameObject);
             }
         }
     }
