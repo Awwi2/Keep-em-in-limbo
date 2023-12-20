@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public float moveSpeed = 3f; // Adjust the speed of the enemy
-    public float detectionRange = 5f; // Range within which the enemy detects the player
+    [SerializeField] float moveSpeed = 3f; // Adjust the speed of the enemy
+    [SerializeField] float detectionRange = 5f; // Range within which the enemy detects the player
 
     private Rigidbody2D rb;
     private GameObject player;
@@ -48,10 +48,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("This aint it right?!");
+        
         if (collision.collider.tag == "player") // Check if the collider has a specific tag
         {
-            Debug.Log("Collision between Player and this Obj detected!");
+            
             if (playerMovement.dashCounter <= 0f) //Player only takes dmg when he is not dashing
             {
                 playerMovement.health -= 1;

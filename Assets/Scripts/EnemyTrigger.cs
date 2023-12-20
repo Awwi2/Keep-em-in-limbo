@@ -32,7 +32,7 @@ public class EnemyTrigger : MonoBehaviour
             enemyNumber -= 1;
             if (enemyNumber == 0)
             {
-                doors.SetActive(false);
+                Destroy(doors);
             }
         }
     }

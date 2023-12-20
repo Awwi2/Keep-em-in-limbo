@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public int health = 3;
-    public Rigidbody2D rb;
-    private Renderer rend;
+    [SerializeField] Rigidbody2D rb;
     [SerializeField] BoxCollider2D dashcollider;
+    private Renderer rend;
 
+    [SerializeField] float moveSpeed = 5f;
+    public int health = 3;
     Vector2 movement;
 
     //Dash stuff
     private float activeMoveSpeed;
-    public float dashSpeed;
-
-    public float dashLength = .5f, dashCooldown = 1f;
-
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashLength = .5f, dashCooldown = 1f;
     public float dashCounter; //for access in other scripts this is public (only read)
     private float dashCoolCounter;
 
