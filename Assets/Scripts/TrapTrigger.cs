@@ -6,7 +6,6 @@ public class TrapTrigger : MonoBehaviour
 {
     private void Start()
     {
-        Debug.Log("Does this even work?");
     }
     // Start is called before the first frame update
 

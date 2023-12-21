@@ -85,9 +85,5 @@ public class PlayerMovement : MonoBehaviour
             activeMoveSpeed = moveSpeed;
             rend.material.color = Color.green;
         }
-        if( health <= 0)
-        {
-            Debug.Log("U ded!");
-        }
     }
 }

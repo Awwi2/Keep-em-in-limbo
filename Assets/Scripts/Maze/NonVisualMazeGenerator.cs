@@ -36,7 +36,7 @@ public class NonVisualMazeGenerator : MonoBehaviour
     List<GameObject> ULR;
     List<GameObject> UR;
 
-    private void Start()
+    private void Awake()
     {
         D = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/D"));
         DL = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/DL"));
@@ -53,12 +53,9 @@ public class NonVisualMazeGenerator : MonoBehaviour
         UL = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/UL"));
         ULR = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/ULR"));
         UR = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/UR"));
-
-        List<Node> nodes = GenerateMaze(mazeSize);
-        BuildMazeFlo(nodes);
     }
 
-    List<Node> GenerateMaze(Vector2Int size)
+    public void GenerateMaze(Vector2Int size)
     {
         List<Node> nodes = new List<Node>();
 
@@ -163,7 +160,7 @@ public class NonVisualMazeGenerator : MonoBehaviour
             }
         }
 
-        return nodes;
+        BuildMazeFlo(nodes);
     }
 
     void BuildMazeFlo(List<Node> n)
