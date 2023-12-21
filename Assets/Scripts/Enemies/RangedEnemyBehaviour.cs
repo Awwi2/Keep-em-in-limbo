@@ -8,8 +8,10 @@ public class RangedEnemyBehaviour : MonoBehaviour
     [SerializeField] float detectionRange = 5f; // Range within which the enemy detects the player
     [SerializeField] float shotCooldown = 1f;
     [SerializeField] float projectileSpeed = 4f;
+    [SerializeField] float offsetDistance = 1f;
 
     public GameObject projectilePrefab;
+
 
     private Rigidbody2D rb;
     private GameObject player;
@@ -89,6 +91,9 @@ public class RangedEnemyBehaviour : MonoBehaviour
     {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         Vector2 direction = (playerTrans.position - transform.position).normalized;
+        // Offset the projectile's spawn position in the direction the enemy is facing
+        Vector2 spawnPosition = (Vector2)transform.position + direction * offsetDistance;
+        projectile.transform.position = spawnPosition;
         projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
     }
 
