@@ -19,6 +19,8 @@ public class NonVisualMazeGenerator : MonoBehaviour
     [SerializeField] float roomWidth;
     [SerializeField] float roomHeight;
     [SerializeField] GameObject camTrigger;
+    GameObject player;
+    GameObject camera;
 
     List<GameObject> D;
     List<GameObject> DL;
@@ -36,8 +38,22 @@ public class NonVisualMazeGenerator : MonoBehaviour
     List<GameObject> ULR;
     List<GameObject> UR;
 
-    private void Awake()
+    List<GameObject> EndingD;
+    List<GameObject> EndingL;
+    List<GameObject> EndingR;
+    List<GameObject> EndingU;
+
+    List<GameObject> BeginD;
+    List<GameObject> BeginL;
+    List<GameObject> BeginR;
+    List<GameObject> BeginU;
+
+
+    public void Awake()
     {
+        player = GameObject.Find("Player");
+        camera = GameObject.Find("Main Camera");
+
         D = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/D"));
         DL = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/DL"));
         DLR = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/DLR"));
@@ -53,6 +69,16 @@ public class NonVisualMazeGenerator : MonoBehaviour
         UL = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/UL"));
         ULR = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/ULR"));
         UR = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/UR"));
+
+        EndingD = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/Exits/D"));
+        EndingL = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/Exits/L"));
+        EndingR = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/Exits/R"));
+        EndingU = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/Exits/U"));
+
+        BeginD = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/Entrances/D"));
+        BeginL = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/Entrances/L"));
+        BeginR = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/Entrances/R"));
+        BeginU = new List<GameObject>(Resources.LoadAll<GameObject>("Rooms/Entrances/U"));
     }
 
     public void GenerateMaze(Vector2Int size)
@@ -165,7 +191,9 @@ public class NonVisualMazeGenerator : MonoBehaviour
 
     void BuildMazeFlo(List<Node> n)
     {
-
+        List<GameObject> prefabs = new List<GameObject>();
+        List<Vector3> positions = new List<Vector3>();
+        List<int> endingIndexes = new List<int>();
         GameObject prefab = UDLR[0];
         string udlr = "";
         foreach (Node N in n)
@@ -175,10 +203,10 @@ public class NonVisualMazeGenerator : MonoBehaviour
             if (N.left) {udlr += "L"; }
             if (N.right) {udlr += "R"; }
             
-            if (udlr == "U") { prefab = U[Random.Range(0, U.Count)]; }
-            else if (udlr == "D") { prefab = D[Random.Range(0, D.Count)]; }
-            else if (udlr == "L") { prefab = L[Random.Range(0, L.Count)]; }
-            else if (udlr == "R") { prefab = R[Random.Range(0, R.Count)]; }
+            if (udlr == "U") { prefab = U[Random.Range(0, U.Count)]; endingIndexes.Add(n.IndexOf(N)); }
+            else if (udlr == "D") { prefab = D[Random.Range(0, D.Count)]; endingIndexes.Add(n.IndexOf(N)); }
+            else if (udlr == "L") { prefab = L[Random.Range(0, L.Count)]; endingIndexes.Add(n.IndexOf(N)); }
+            else if (udlr == "R") { prefab = R[Random.Range(0, R.Count)]; endingIndexes.Add(n.IndexOf(N)); }
             else if (udlr == "UD") { prefab = UD[Random.Range(0, UD.Count)]; }
             else if (udlr == "UL") { prefab = UL[Random.Range(0, UL.Count)]; }
             else if (udlr == "UR") { prefab = UR[Random.Range(0, UR.Count)]; }
@@ -191,9 +219,33 @@ public class NonVisualMazeGenerator : MonoBehaviour
             else if (udlr == "DLR") { prefab = DLR[Random.Range(0, DLR.Count)]; }
             else if (udlr == "UDLR") { prefab = UDLR[Random.Range(0, UDLR.Count )]; }
             udlr = "";
+            prefabs.Add(prefab);
             Vector3 nodePos = new Vector3(N.x * (-roomWidth + 0.2f), N.y * (roomHeight - 0.2f), 0);
-            Instantiate(prefab, nodePos, Quaternion.identity, transform);
-            Instantiate(camTrigger, nodePos, Quaternion.identity, transform);
+            positions.Add(nodePos);
+            //Instantiate(prefab, nodePos, Quaternion.identity, transform);
+            Instantiate(camTrigger, nodePos, Quaternion.identity);
+        }
+
+        int temp = Random.Range(0, endingIndexes.Count);
+        if (n[endingIndexes[temp]].up) { prefabs[endingIndexes[temp]] = EndingU[Random.Range(0, EndingU.Count)]; }
+        else if (n[endingIndexes[temp]].down) { prefabs[endingIndexes[temp]] = EndingD[Random.Range(0, EndingD.Count)]; }
+        else if (n[endingIndexes[temp]].left) { prefabs[endingIndexes[temp]] = EndingL[Random.Range(0, EndingL.Count)]; }
+        else if (n[endingIndexes[temp]].right) { prefabs[endingIndexes[temp]] = EndingR[Random.Range(0, EndingR.Count)]; }
+        endingIndexes.Remove(endingIndexes[temp]);
+
+        temp = Random.Range(0, endingIndexes.Count);
+        if (n[endingIndexes[temp]].up) { prefabs[endingIndexes[temp]] = BeginU[Random.Range(0, BeginU.Count)]; }
+        else if (n[endingIndexes[temp]].down) { prefabs[endingIndexes[temp]] = BeginD[Random.Range(0, BeginD.Count)]; }
+        else if (n[endingIndexes[temp]].left) { prefabs[endingIndexes[temp]] = BeginL[Random.Range(0, BeginL.Count)]; }
+        else if (n[endingIndexes[temp]].right) { prefabs[endingIndexes[temp]] = BeginR[Random.Range(0, BeginR.Count)]; }
+        player.transform.position = positions[endingIndexes[temp]] + new Vector3(0,0,-1);
+        camera.transform.position = positions[endingIndexes[temp]] + new Vector3(0, 0, -10);
+
+        endingIndexes.Remove(endingIndexes[temp]);
+
+        for (int a = 0; a < prefabs.Count; a++)
+        {
+            var newGameObject = Instantiate(prefabs[a], positions[a], Quaternion.identity) as GameObject;
         }
     }
 }

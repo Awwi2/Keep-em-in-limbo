@@ -29,61 +29,71 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (dashCounter <= 0f) { 
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
-            movement.Normalize();
-        }
-        
-        if(movement.x > 0)
+        if (!MainManager.Instance.paused)
         {
-            gameObject.transform.localScale = new Vector3(-1, 1, 1);
-        } else if (movement.x < 0)
-        {
-            gameObject.transform.localScale = new Vector3(1, 1, 1);
-        }
-
-        if (movement != new Vector2(0,0))
-        {
-            gameObject.GetComponent<Animator>().SetBool("Walking",true);
-        } else
-        {
-            gameObject.GetComponent<Animator>().SetBool("Walking", false);
-        }
-
-        rb.velocity = movement * activeMoveSpeed;
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (dashCounter <=0 && dashCoolCounter <= 0)
-            {   
-                //Player is dashing
-                dashcollider.enabled = true;
-                rend.material.color = new Color(1f, 0.5f, 0);
-                activeMoveSpeed = dashSpeed;
-                dashCounter = dashLength;
-            }
-        }
-
-        if (dashCounter > 0)
-        {
-            dashCounter -= Time.deltaTime;
-
-            if (dashCounter <= 0)
+            if (dashCounter <= 0f)
             {
-                //Dash vorbei
-                dashcollider.enabled = false;
-                activeMoveSpeed = moveSpeed * 0.75f;
-                dashCoolCounter = dashCooldown;
+                movement.x = Input.GetAxisRaw("Horizontal");
+                movement.y = Input.GetAxisRaw("Vertical");
+                movement.Normalize();
+            }
+
+            if (movement.x > 0)
+            {
+                gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (movement.x < 0)
+            {
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
+            }
+
+            if (movement != new Vector2(0, 0))
+            {
+                gameObject.GetComponent<Animator>().SetBool("Walking", true);
+            }
+            else
+            {
+                gameObject.GetComponent<Animator>().SetBool("Walking", false);
+            }
+
+            rb.velocity = movement * activeMoveSpeed;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (dashCounter <= 0 && dashCoolCounter <= 0)
+                {
+                    //Player is dashing
+                    dashcollider.enabled = true;
+                    rend.material.color = new Color(1f, 0.5f, 0);
+                    activeMoveSpeed = dashSpeed;
+                    dashCounter = dashLength;
+                }
+            }
+
+            if (dashCounter > 0)
+            {
+                dashCounter -= Time.deltaTime;
+
+                if (dashCounter <= 0)
+                {
+                    //Dash vorbei
+                    dashcollider.enabled = false;
+                    activeMoveSpeed = moveSpeed * 0.75f;
+                    dashCoolCounter = dashCooldown;
+                }
+            }
+            if (dashCoolCounter > 0)
+            {
+                dashCoolCounter -= Time.deltaTime;
+            }
+            else if (dashCoolCounter <= 0 && dashCounter <= 0)
+            {
+                activeMoveSpeed = moveSpeed;
+                rend.material.color = Color.green;
             }
         }
-        if (dashCoolCounter > 0)
+        else
         {
-            dashCoolCounter -= Time.deltaTime;
-        } 
-        else if (dashCoolCounter <= 0 && dashCounter <= 0)
-        {
-            activeMoveSpeed = moveSpeed;
-            rend.material.color = Color.green;
+            rb.velocity = new Vector2(0, 0);
         }
     }
 }

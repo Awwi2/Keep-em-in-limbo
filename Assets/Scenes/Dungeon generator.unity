@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &451658297 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4891336606432650417, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
+  m_PrefabInstance: {fileID: 875673686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &491815087
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +176,8 @@ MonoBehaviour:
   roomWidth: 26
   roomHeight: 16
   camTrigger: {fileID: 2129602178835617835, guid: 495f5ad65f997d140b1fe40f9161fd4a, type: 3}
+  player: {fileID: 0}
+  camera: {fileID: 0}
 --- !u!1001 &875673686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179,6 +186,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2022511173978475956, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4891336606432650417, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
       propertyPath: m_Name
       value: Player
@@ -448,6 +459,8 @@ MonoBehaviour:
   roomWidth: 26
   roomHeight: 14
   camTrigger: {fileID: 2129602178835617835, guid: 495f5ad65f997d140b1fe40f9161fd4a, type: 3}
+  player: {fileID: 451658297}
+  camera: {fileID: 1313228543}
 --- !u!114 &1753072462
 MonoBehaviour:
   m_ObjectHideFlags: 0
