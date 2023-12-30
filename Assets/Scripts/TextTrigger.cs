@@ -12,6 +12,7 @@ public class TextTrigger : MonoBehaviour
         {
             MainManager.Instance.paused = true;
             text.SetActive(true);
+            Debug.Log("Starting the Dialogue - Trigger");
             text.GetComponent<TextBoxes>().StartDialogue();
             gameObject.SetActive(false);
         }

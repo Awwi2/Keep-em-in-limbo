@@ -19,8 +19,7 @@ public class TextBoxes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        textComponent.text = string.Empty;
-        Debug.Log("Starting");
+        
     }
 
     // Update is called once per frame
@@ -28,6 +27,7 @@ public class TextBoxes : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("Skip");
             if (textComponent.text == currentLines[index])
             {
                 NextLine();
@@ -42,6 +42,8 @@ public class TextBoxes : MonoBehaviour
 
     public void StartDialogue()
     {
+        textComponent.text = string.Empty;
+        Debug.Log("Starting Dialogue - Boxes");
         switch (MainManager.Instance.deathCount)
         {
             case 0:
@@ -58,13 +60,15 @@ public class TextBoxes : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        foreach (char c in currentLines[index].ToCharArray())
+        Debug.Log("Printing new Line");
+        string currentLine = currentLines[index];
+        foreach (char c in currentLine.ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
-            if (new List<char>(currentLines[index].ToCharArray()).IndexOf(c) == currentLines[index].ToCharArray().Length - 1)
+            if (new List<char>(currentLine.ToCharArray()).IndexOf(c) == currentLine.ToCharArray().Length - 1)
             {
-                textComponent.text = currentLines[index];
+                textComponent.text = currentLine;
             }
         }
     }

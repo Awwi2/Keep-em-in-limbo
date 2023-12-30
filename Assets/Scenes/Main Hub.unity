@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 404948414}
-  lines:
+  welcomeLines:
   - Oh look, a new person
   - I was wondering how long I'd have to stay alone here
   - I mean People pass though here all the time
@@ -266,7 +266,15 @@ MonoBehaviour:
   - Well there are strange beings down in the Labyrinth
   - If you are planning to go down there, then good luck
   - You'll need it
+  firstDeathLines:
+  - Oh look, a new person
+  - Wait...
+  - You are back...
+  - Seems like something is keeping you here
+  - Seems like you are not allowed to rest just yet...
+  MainManager: {fileID: 1464979042}
   textSpeed: 0.01
+  currentLines: []
   index: 0
 --- !u!114 &108905753
 MonoBehaviour:
@@ -7111,6 +7119,7 @@ MonoBehaviour:
   - {x: 5, y: 5}
   - {x: 5, y: 5}
   paused: 0
+  deathCount: 0
 --- !u!4 &1464979043
 Transform:
   m_ObjectHideFlags: 0
