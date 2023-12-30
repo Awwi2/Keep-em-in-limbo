@@ -6,8 +6,13 @@ using TMPro;
 public class TextBoxes : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
-    public string[] lines;
+
+    public string[] welcomeLines;
+    public string[] firstDeathLines;
+
+    public MainManager MainManager;
     public float textSpeed;
+    public string[] currentLines;
 
     [SerializeField]private int index;
 
@@ -15,6 +20,7 @@ public class TextBoxes : MonoBehaviour
     void Start()
     {
         textComponent.text = string.Empty;
+        Debug.Log("Starting");
     }
 
     // Update is called once per frame
@@ -22,20 +28,29 @@ public class TextBoxes : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (textComponent.text == lines[index])
+            if (textComponent.text == currentLines[index])
             {
                 NextLine();
             }
             else
             {
                 StopAllCoroutines();
-                textComponent.text = lines[index];
+                textComponent.text = currentLines[index];
             }
         }
     }
 
     public void StartDialogue()
     {
+        switch (MainManager.Instance.deathCount)
+        {
+            case 0:
+                currentLines = welcomeLines;
+                break;
+            case 1:
+                currentLines = firstDeathLines;
+                break;
+        }
         textComponent.text = string.Empty;
         index = 0;
         StartCoroutine(TypeLine());
@@ -43,20 +58,20 @@ public class TextBoxes : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        foreach (char c in lines[index].ToCharArray())
+        foreach (char c in currentLines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
-            if (new List<char>(lines[index].ToCharArray()).IndexOf(c) == lines[index].ToCharArray().Length - 1)
+            if (new List<char>(currentLines[index].ToCharArray()).IndexOf(c) == currentLines[index].ToCharArray().Length - 1)
             {
-                textComponent.text = lines[index];
+                textComponent.text = currentLines[index];
             }
         }
     }
 
     void NextLine()
     {
-        if (index < lines.Length - 1)
+        if (index < currentLines.Length - 1)
         {
             index++;
             textComponent.text = string.Empty;

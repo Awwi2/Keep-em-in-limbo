@@ -54,7 +54,7 @@ public class EnemyBehaviour : MonoBehaviour
             
             if (playerMovement.dashCounter <= 0f) //Player only takes dmg when he is not dashing
             {
-                playerMovement.health -= 1;
+                MainManager.Instance.health -= 1;
             }
             else
             {

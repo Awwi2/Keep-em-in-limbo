@@ -9,12 +9,13 @@ public class MainManager : MonoBehaviour
 
     [SerializeField] int Layer = -1;
     public float health = 3;
+    private float maxHealth = 3;
     [SerializeField] List<Vector2Int> layerSizes; // -1 ; -1 if is a Story Layer
     public bool paused = false;
+    public int deathCount = 0;
 
     private void Awake()
     {
-        Debug.Log("Awake");
 
         if (Instance != null)
         {
@@ -30,7 +31,6 @@ public class MainManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Start");
         Layer++;
 
         if (layerSizes[Layer].x != -1)
@@ -44,7 +44,7 @@ public class MainManager : MonoBehaviour
     {
         if (health <= 0)
         {
-            Debug.Log("U ded!");
+            Death();
         }
     }
 
@@ -59,5 +59,11 @@ public class MainManager : MonoBehaviour
         {
             SceneManager.LoadScene("Dungeon generator");
         }
+    }
+    public void Death()
+    {
+        deathCount += 1;
+        health = maxHealth;
+        SceneManager.LoadScene("Main Hub");
     }
 }

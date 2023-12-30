@@ -94,6 +94,9 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(0, 0);
+            rend.material.color = Color.green;
+            gameObject.GetComponent<Animator>().SetBool("Walking", false);
+
         }
     }
 }
