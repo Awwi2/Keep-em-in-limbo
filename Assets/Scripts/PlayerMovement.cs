@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] BoxCollider2D dashcollider;
+    [SerializeField] BoxCollider2D NormalCollider;
     private Renderer rend;
 
     [SerializeField] float moveSpeed = 5f;
@@ -62,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
                 if (dashCounter <= 0 && dashCoolCounter <= 0)
                 {
                     //Player is dashing
+                    NormalCollider.enabled = false;
                     dashcollider.enabled = true;
                     rend.material.color = new Color(1f, 0.5f, 0);
                     activeMoveSpeed = dashSpeed;
@@ -76,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 if (dashCounter <= 0)
                 {
                     //Dash vorbei
+                    NormalCollider.enabled = true;
                     dashcollider.enabled = false;
                     activeMoveSpeed = moveSpeed * 0.75f;
                     dashCoolCounter = dashCooldown;

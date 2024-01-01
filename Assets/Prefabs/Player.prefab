@@ -101,10 +101,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f4a1172d480d346891fca84d8b3a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
-  health: 3
   rb: {fileID: 1005919202079894881}
   dashcollider: {fileID: 2022511173978475956}
+  NormalCollider: {fileID: 5475254718327792205}
+  moveSpeed: 7
+  health: 3
   dashSpeed: 20
   dashLength: 0.15
   dashCooldown: 2

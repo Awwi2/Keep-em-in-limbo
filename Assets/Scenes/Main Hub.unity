@@ -7080,6 +7080,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1423511203 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5475254718327792205, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
+  m_PrefabInstance: {fileID: 4681830501448863279}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1464979041
 GameObject:
   m_ObjectHideFlags: 0
@@ -7308,6 +7313,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2176275941067257484, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
+      propertyPath: NormalCollider
+      value: 
+      objectReference: {fileID: 1423511203}
     - target: {fileID: 4891336606432650417, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
       propertyPath: m_Name
       value: Player
