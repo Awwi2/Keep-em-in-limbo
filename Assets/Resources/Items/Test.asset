@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   description: 
-  image: {fileID: 0}
-  healthModifier: 0
+  image: {fileID: -1402469804, guid: b7f2a70383d1c28488fce4bf294b0127, type: 3}
+  healthModifier: 1
   maxHealthModfier: 0
   cooldownModifier: 0
   speedModifier: 0
   dashCooldownSpeedModifier: 0
   dashSpeedModifier: 0
   corruptionModifier: 0
-  rarity: 0
+  rarity: 100
