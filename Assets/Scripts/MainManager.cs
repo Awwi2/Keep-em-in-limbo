@@ -8,8 +8,8 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
 
     [SerializeField] int Layer = -1;
-    public float health = 3;
-    private float maxHealth = 3;
+    public int health = 3;
+    public int maxHealth = 3;
     [SerializeField] List<Vector2Int> layerSizes; // -1 ; -1 if is a Story Layer
     public bool paused = false;
     public int deathCount = 0;
@@ -49,8 +49,7 @@ public class MainManager : MonoBehaviour
     }
 
     public void Downstairs()
-    {
-        Debug.Log("LETS GO!");
+    {       
         if (layerSizes[Layer + 1].x == -1)
         {
             SceneManager.LoadScene("Ending");
@@ -65,5 +64,16 @@ public class MainManager : MonoBehaviour
         deathCount += 1;
         health = maxHealth;
         SceneManager.LoadScene("Main Hub");
+    }
+    public void Damage(int amount)
+    {       
+        if (amount >= health) 
+        {
+            health = 0;
+            Death();
+        }
+        else { health -= amount; }
+        
+
     }
 }

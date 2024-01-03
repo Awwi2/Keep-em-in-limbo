@@ -27,7 +27,6 @@ public class TextBoxes : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Skip");
             if (textComponent.text == currentLines[index])
             {
                 NextLine();
@@ -43,7 +42,6 @@ public class TextBoxes : MonoBehaviour
     public void StartDialogue()
     {
         textComponent.text = string.Empty;
-        Debug.Log("Starting Dialogue - Boxes");
         switch (MainManager.Instance.deathCount)
         {
             case 0:
@@ -60,7 +58,6 @@ public class TextBoxes : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        Debug.Log("Printing new Line");
         string currentLine = currentLines[index];
         foreach (char c in currentLine.ToCharArray())
         {

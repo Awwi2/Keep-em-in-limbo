@@ -11,8 +11,7 @@ public class TextTrigger : MonoBehaviour
         if (collision.tag == "player")
         {
             MainManager.Instance.paused = true;
-            text.SetActive(true);
-            Debug.Log("Starting the Dialogue - Trigger");
+            text.SetActive(true);           
             text.GetComponent<TextBoxes>().StartDialogue();
             gameObject.SetActive(false);
         }

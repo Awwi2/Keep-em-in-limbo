@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private Renderer rend;
 
     [SerializeField] float moveSpeed = 5f;
-    public int health = 3;
     Vector2 movement;
 
     //Dash stuff

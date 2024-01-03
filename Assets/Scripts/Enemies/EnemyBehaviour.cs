@@ -6,21 +6,28 @@ public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 3f; // Adjust the speed of the enemy
     [SerializeField] float detectionRange = 5f; // Range within which the enemy detects the player
+    [SerializeField] int enemyDamage = 1;
 
     private Rigidbody2D rb;
     private GameObject player;
     private Transform playerTrans;
     private bool isPlayerInRange;
     private PlayerMovement playerMovement;
+    private GameObject Manager;
+    private MainManager MM;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("player"); // Assumes the player has the "Player" tag
         playerTrans = player.transform;
+        Manager = GameObject.FindGameObjectWithTag("manager");
+        MM = Manager.GetComponent<MainManager>();
         playerMovement = player.GetComponent<PlayerMovement>();
         isPlayerInRange = false;
         InvokeRepeating("CheckPlayerInRange", 0f, 0.5f); // Check for player in range every 0.5 seconds
+
+
     }
 
     void Update()
@@ -54,7 +61,7 @@ public class EnemyBehaviour : MonoBehaviour
             
             if (playerMovement.dashCounter <= 0f) //Player only takes dmg when he is not dashing
             {
-                MainManager.Instance.health -= 1;
+                MM.Damage(enemyDamage);
             }
             else
             {
@@ -63,5 +70,4 @@ public class EnemyBehaviour : MonoBehaviour
             
         }
     }
-
 }
