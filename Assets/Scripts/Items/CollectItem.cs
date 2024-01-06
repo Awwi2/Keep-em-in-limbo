@@ -12,6 +12,12 @@ public class CollectItem : MonoBehaviour
         {
             Debug.Log("collect");
             MainManager.Instance.health += Item.healthModifier;
+            MainManager.Instance.maxHealth += Item.maxHealthModfier;
+            MainManager.Instance.dashCooldown += Item.dashCooldownSpeedModifier;
+            MainManager.Instance.moveSpeed += Item.speedModifier;
+            MainManager.Instance.dashSpeed += Item.dashSpeedModifier;
+            MainManager.Instance.dashCooldownSpeed += Item.dashCooldownSpeedModifier;
+            MainManager.Instance.corruption += Item.corruptionModifier;
             Destroy(gameObject);
         }
     }

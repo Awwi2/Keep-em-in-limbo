@@ -9,20 +9,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] BoxCollider2D NormalCollider;
     private Renderer rend;
 
-    [SerializeField] float moveSpeed = 5f;
     Vector2 movement;
 
     //Dash stuff
-    private float activeMoveSpeed;
-    [SerializeField] float dashSpeed;
-    [SerializeField] float dashLength = .5f, dashCooldown = 1f;
+    float activeMoveSpeed;
+    [SerializeField] float dashLength = .5f;
     public float dashCounter; //for access in other scripts this is public (only read)
     private float dashCoolCounter;
 
 
     private void Start()
     {
-        activeMoveSpeed = moveSpeed;
+        activeMoveSpeed = MainManager.Instance.moveSpeed;
         rend = GetComponent<Renderer>();
         rend.material.color = Color.green;
     }
@@ -65,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
                     NormalCollider.enabled = false;
                     dashcollider.enabled = true;
                     rend.material.color = new Color(1f, 0.5f, 0);
-                    activeMoveSpeed = dashSpeed;
+                    activeMoveSpeed = MainManager.Instance.dashSpeed;
                     dashCounter = dashLength;
                 }
             }
@@ -79,8 +77,8 @@ public class PlayerMovement : MonoBehaviour
                     //Dash vorbei
                     NormalCollider.enabled = true;
                     dashcollider.enabled = false;
-                    activeMoveSpeed = moveSpeed * 0.75f;
-                    dashCoolCounter = dashCooldown;
+                    activeMoveSpeed = MainManager.Instance.moveSpeed * MainManager.Instance.dashCooldownSpeed;
+                    dashCoolCounter = MainManager.Instance.dashCooldown;
                 }
             }
             if (dashCoolCounter > 0)
@@ -89,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (dashCoolCounter <= 0 && dashCounter <= 0)
             {
-                activeMoveSpeed = moveSpeed;
+                activeMoveSpeed = MainManager.Instance.moveSpeed;
                 rend.material.color = Color.green;
             }
         }
