@@ -14,18 +14,17 @@ public class RangedEnemyBehaviour : MonoBehaviour
 
 
     private Rigidbody2D rb;
-    private GameObject player;
+    [SerializeField] private GameObject player;
     private Transform playerTrans;
     private bool isPlayerInRange;
     private PlayerMovement playerMovement;
     private float shotCooldownCounter;
-    private GameObject Manager;
+    [SerializeField] private GameObject Manager;
     private MainManager MM;
 
     void Start()
     {
         Manager = GameObject.FindGameObjectWithTag("manager");
-        MM = Manager.GetComponent<MainManager>();
         shotCooldownCounter = shotCooldown;
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("player"); // Assumes the player has the "Player" tag

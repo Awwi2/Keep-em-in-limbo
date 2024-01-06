@@ -7,22 +7,21 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] float moveSpeed = 3f; // Adjust the speed of the enemy
     [SerializeField] float detectionRange = 5f; // Range within which the enemy detects the player
     [SerializeField] int enemyDamage = 1;
+    [SerializeField] float flummiForce;
+    private bool isAlive = true;
 
     private Rigidbody2D rb;
-    private GameObject player;
+    [SerializeField] private GameObject player;
     private Transform playerTrans;
     private bool isPlayerInRange;
     private PlayerMovement playerMovement;
-    private GameObject Manager;
-    private MainManager MM;
-
+    [SerializeField] private MainManager MM;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("player"); // Assumes the player has the "Player" tag
-        playerTrans = player.transform;
-        Manager = GameObject.FindGameObjectWithTag("manager");
-        MM = Manager.GetComponent<MainManager>();
+        playerTrans = player.transform;       
         playerMovement = player.GetComponent<PlayerMovement>();
         isPlayerInRange = false;
         InvokeRepeating("CheckPlayerInRange", 0f, 0.5f); // Check for player in range every 0.5 seconds
@@ -33,7 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
     void Update()
     {
 
-        if (isPlayerInRange)
+        if (isPlayerInRange && isAlive)
         {
             Vector2 direction = (playerTrans.position - transform.position).normalized;
             rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
@@ -59,15 +58,23 @@ public class EnemyBehaviour : MonoBehaviour
         if (collision.collider.tag == "player") // Check if the collider has a specific tag
         {
             
-            if (playerMovement.dashCounter <= 0f) //Player only takes dmg when he is not dashing
+            if (playerMovement.dashCounter <= 0f && isAlive) //Player only takes dmg when he is not dashing
             {
                 MM.Damage(enemyDamage);
             }
             else
             {
-                Destroy(gameObject); // Enemy is killed by player
+                isAlive = false;
+                StartCoroutine(Death(0f));
+                //Initiate Flummimode
             }
             
         }
+        
+    }
+    IEnumerator Death(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }
