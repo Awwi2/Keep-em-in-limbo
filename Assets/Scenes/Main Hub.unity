@@ -7592,9 +7592,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f06623f4048e8594fa48f5cba17a71e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Layer: -1
+  originalMaxHealth: 3
+  originalMoveSpeed: 7
+  originalDashCooldown: 1
+  originalDashCooldownSpeed: 0.75
+  originalDashSpeed: 20
   health: 3
   maxHealth: 3
+  moveSpeed: 7
+  dashCooldown: 1
+  dashCooldownSpeed: 0.75
+  dashSpeed: 20
+  corruption: 0
+  Layer: -1
   layerSizes:
   - {x: -1, y: -1}
   - {x: 5, y: 5}
