@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] BoxCollider2D dashcollider;
     [SerializeField] BoxCollider2D NormalCollider;
-    private Renderer rend;
 
     Vector2 movement;
 
@@ -21,8 +20,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         activeMoveSpeed = MainManager.Instance.moveSpeed;
-        rend = GetComponent<Renderer>();
-        rend.material.color = Color.green;
     }
 
     void Update()
@@ -62,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
                     //Player is dashing
                     NormalCollider.enabled = false;
                     dashcollider.enabled = true;
-                    rend.material.color = new Color(1f, 0.5f, 0);
+                    gameObject.GetComponent<Animator>().SetBool("Dashing", true);
                     activeMoveSpeed = MainManager.Instance.dashSpeed;
                     dashCounter = dashLength;
                 }
@@ -75,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
                 if (dashCounter <= 0)
                 {
                     //Dash vorbei
+                    gameObject.GetComponent<Animator>().SetBool("Dashing", false);
                     NormalCollider.enabled = true;
                     dashcollider.enabled = false;
                     activeMoveSpeed = MainManager.Instance.moveSpeed * MainManager.Instance.dashCooldownSpeed;
@@ -88,13 +86,11 @@ public class PlayerMovement : MonoBehaviour
             else if (dashCoolCounter <= 0 && dashCounter <= 0)
             {
                 activeMoveSpeed = MainManager.Instance.moveSpeed;
-                rend.material.color = Color.green;
             }
         }
         else
         {
             rb.velocity = new Vector2(0, 0);
-            rend.material.color = Color.green;
             gameObject.GetComponent<Animator>().SetBool("Walking", false);
 
         }
