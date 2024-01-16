@@ -268,10 +268,16 @@ MonoBehaviour:
   - You'll need it
   firstDeathLines:
   - Oh look, a new person
-  - Wait...
-  - You are back...
-  - Seems like something is keeping you here
-  - Seems like you are not allowed to rest just yet...
+  - So the last guy is gone then...
+  - Maybe I should have taught them how to fight
+  - But now that you are here, I can tell you
+  - First of all, welcome to limbo
+  - A plane between life and death
+  - You cant leave becaus of this labyrinth
+  - And there are monsters in there.
+  - Since you don't seem to have any weapons, maybe try to tackle them
+  - When you see an enemy try pressing SPACE
+  - Or don't, I dont care
   MainManager: {fileID: 1464979042}
   textSpeed: 0.01
   currentLines: []
