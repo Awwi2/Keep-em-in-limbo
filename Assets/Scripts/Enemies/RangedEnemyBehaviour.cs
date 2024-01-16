@@ -19,12 +19,9 @@ public class RangedEnemyBehaviour : MonoBehaviour
     private bool isPlayerInRange;
     private PlayerMovement playerMovement;
     private float shotCooldownCounter;
-    [SerializeField] private GameObject Manager;
-    private MainManager MM;
 
     void Start()
     {
-        Manager = GameObject.FindGameObjectWithTag("manager");
         shotCooldownCounter = shotCooldown;
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("player"); // Assumes the player has the "Player" tag
@@ -79,7 +76,7 @@ public class RangedEnemyBehaviour : MonoBehaviour
 
             if (playerMovement.dashCounter <= 0f) //Player only takes dmg when he is not dashing
             {
-                MM.Damage(1);
+                MainManager.Instance.Damage(1);
             }
             else
             {

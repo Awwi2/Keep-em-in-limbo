@@ -15,7 +15,6 @@ public class EnemyBehaviour : MonoBehaviour
     private Transform playerTrans;
     private bool isPlayerInRange;
     private PlayerMovement playerMovement;
-    [SerializeField] private MainManager MM;
     
     void Start()
     {
@@ -60,7 +59,7 @@ public class EnemyBehaviour : MonoBehaviour
             
             if (playerMovement.dashCounter <= 0f && isAlive) //Player only takes dmg when he is not dashing
             {
-                MM.Damage(enemyDamage);
+                MainManager.Instance.Damage(enemyDamage);
             }
             else
             {
