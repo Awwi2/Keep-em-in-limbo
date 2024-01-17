@@ -20,6 +20,7 @@ public class MainManager : MonoBehaviour
     public float dashCooldownSpeed = 0.75f;
     public float dashSpeed = 20f;
     public int corruption = 0;
+    public bool isSlip = false;
 
     [SerializeField] int Layer = -1;
     [SerializeField] List<Vector2Int> layerSizes; // -1 ; -1 if is a Story Layer

@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashLength = .5f;
     public float dashCounter; //for access in other scripts this is public (only read)
     private float dashCoolCounter;
+    [SerializeField] float slipperySpeedModifier = 0.03f;
+    [SerializeField] int slipSpeedCap = 20;
 
 
     private void Start()
@@ -51,7 +53,31 @@ public class PlayerMovement : MonoBehaviour
                 gameObject.GetComponent<Animator>().SetBool("Walking", false);
             }
 
-            rb.velocity = movement * activeMoveSpeed;
+            if (MainManager.Instance.isSlip)
+            {
+                rb.velocity += movement * activeMoveSpeed * slipperySpeedModifier;
+
+                if (rb.velocity.x > slipSpeedCap && dashCounter <= 0)
+                {
+                    rb.velocity = new Vector2(slipSpeedCap, rb.velocity.y);
+                } else if (rb.velocity.x < -slipSpeedCap && dashCounter <= 0)
+                {
+                    rb.velocity = new Vector2(-slipSpeedCap, rb.velocity.y);
+                }
+                if (rb.velocity.y > slipSpeedCap && dashCounter <= 0)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, slipSpeedCap);
+                }
+                else if (rb.velocity.y < -slipSpeedCap && dashCounter <= 0)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, -slipSpeedCap);
+                }
+            }
+            else
+            {
+                rb.velocity = movement * activeMoveSpeed;
+            }
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (dashCounter <= 0 && dashCoolCounter <= 0)
