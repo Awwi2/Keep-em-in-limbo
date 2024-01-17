@@ -7610,6 +7610,7 @@ MonoBehaviour:
   dashCooldownSpeed: 0.75
   dashSpeed: 20
   corruption: 0
+  isSlip: 0
   Layer: -1
   layerSizes:
   - {x: -1, y: -1}
@@ -7837,6 +7838,10 @@ PrefabInstance:
       propertyPath: NormalCollider
       value: 
       objectReference: {fileID: 1423511203}
+    - target: {fileID: 2176275941067257484, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
+      propertyPath: slipperySpeedModifier
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 4891336606432650417, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
       propertyPath: m_Name
       value: Player
