@@ -15,13 +15,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashLength = 0.5f;
     public float dashCounter; //for access in other scripts this is public (only read)
     private float dashCoolCounter;
+    [SerializeField] SpriteRenderer eyeSprite;
     [SerializeField] float slipperySpeedModifier = 0.03f;
     [SerializeField] int slipSpeedCap = 20;
+    [SerializeField] Sprite[] eyes;
 
 
     private void Start()
     {
         activeMoveSpeed = MainManager.Instance.moveSpeed;
+        Debug.Log(eyeSprite.sprite.ToString());
+        eyeSprite.sprite = eyes[0];
+        eyeSprite.size = new Vector2(100, 2);
     }
 
     void Update()
@@ -83,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
                 if (dashCounter == 0 && dashCoolCounter <= 0)
                 {
                     //Player is dashing
+                    eyeSprite.sprite = eyes[1];
                     NormalCollider.enabled = false;
                     dashcollider.enabled = true;
                     gameObject.GetComponent<Animator>().SetBool("Dashing", true);
@@ -98,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
                 if (dashCounter <= 0)
                 {
                     //Dash vorbei
+                    eyeSprite.sprite = eyes[2];
                     dashCounter = 0;
                     gameObject.GetComponent<Animator>().SetBool("Dashing", false);
                     NormalCollider.enabled = true;
@@ -108,10 +115,13 @@ public class PlayerMovement : MonoBehaviour
             }
             if (dashCoolCounter > 0)
             {
+                //Dash on cooldown
                 dashCoolCounter -= Time.deltaTime;
             }
             else if (dashCoolCounter <= 0 && dashCounter <= 0)
             {
+                //Dash no longer on cooldown
+                eyeSprite.sprite = eyes[0];
                 activeMoveSpeed = MainManager.Instance.moveSpeed;
             }
         }
