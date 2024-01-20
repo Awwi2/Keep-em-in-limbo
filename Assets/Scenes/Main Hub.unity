@@ -7847,6 +7847,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2176275941067257484, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
+      propertyPath: dashLength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176275941067257484, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
       propertyPath: NormalCollider
       value: 
       objectReference: {fileID: 1423511203}
