@@ -57,7 +57,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (collision.collider.tag == "player") // Check if the collider has a specific tag
         {
             
-            if (playerMovement.dashCounter <= 0f && isAlive) //Player only takes dmg when he is not dashing
+            if (playerMovement.dashCounter == 0f && isAlive) //Player only takes dmg when he is not dashing
             {
                 MainManager.Instance.Damage(enemyDamage);
             }

@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Dash stuff
     float activeMoveSpeed;
-    [SerializeField] float dashLength = .5f;
+    [SerializeField] float dashLength = 0.5f;
     public float dashCounter; //for access in other scripts this is public (only read)
     private float dashCoolCounter;
     [SerializeField] float slipperySpeedModifier = 0.03f;
@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (dashCounter <= 0 && dashCoolCounter <= 0)
+                if (dashCounter == 0 && dashCoolCounter <= 0)
                 {
                     //Player is dashing
                     NormalCollider.enabled = false;
@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
                 if (dashCounter <= 0)
                 {
                     //Dash vorbei
+                    dashCounter = 0;
                     gameObject.GetComponent<Animator>().SetBool("Dashing", false);
                     NormalCollider.enabled = true;
                     dashcollider.enabled = false;
