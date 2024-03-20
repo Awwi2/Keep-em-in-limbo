@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce6c932945b6e384b8fae61bbba5b26e, type: 3}
-  m_Name: Test
+  m_Name: HealthNugget
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  image: {fileID: -1402469804, guid: b7f2a70383d1c28488fce4bf294b0127, type: 3}
+  name: Health nugget
+  description: Restores 1 HP
+  image: {fileID: 1380669298, guid: b7f2a70383d1c28488fce4bf294b0127, type: 3}
   healthModifier: 1
   maxHealthModfier: 0
   cooldownModifier: 0
@@ -23,3 +23,4 @@ MonoBehaviour:
   dashSpeedModifier: 0
   corruptionModifier: 0
   rarity: 100
+  specialEffect: 0

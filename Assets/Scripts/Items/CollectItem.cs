@@ -18,6 +18,14 @@ public class CollectItem : MonoBehaviour
             MainManager.Instance.dashSpeed += Item.dashSpeedModifier;
             MainManager.Instance.dashCooldownSpeed += Item.dashCooldownSpeedModifier;
             MainManager.Instance.corruption += Item.corruptionModifier;
+            switch (Item.specialEffect)
+            {
+                case 0:
+                    break;
+                case 1:
+                    MainManager.Instance.isSlip = true;
+                    break;
+            }
             Destroy(gameObject);
         }
     }

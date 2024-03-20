@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Item")]
 public class StatItems : ScriptableObject
@@ -20,5 +21,5 @@ public class StatItems : ScriptableObject
 
     public int rarity = 100;
 
-
+    public int specialEffect;
 }

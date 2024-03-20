@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6c932945b6e384b8fae61bbba5b26e, type: 3}
+  m_Name: Soap
+  m_EditorClassIdentifier: 
+  name: 
+  description: 
+  image: {fileID: 0}
+  healthModifier: 0
+  maxHealthModfier: 0
+  cooldownModifier: 0
+  speedModifier: 0
+  dashCooldownSpeedModifier: 0
+  dashSpeedModifier: 0
+  corruptionModifier: 0
+  rarity: 100
