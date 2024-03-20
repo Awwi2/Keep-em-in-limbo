@@ -14,8 +14,6 @@ public class SpawnItem : MonoBehaviour
         int r = Random.Range(1,101);
         foreach (StatItems i in items)
         {
-            Debug.Log(r);
-            Debug.Log(i.rarity);
             if (r <= i.rarity)
             {
                 usableItems.Add(i);

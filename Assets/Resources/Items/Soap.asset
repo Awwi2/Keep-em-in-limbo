@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6c932945b6e384b8fae61bbba5b26e, type: 3}
   m_Name: Soap
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  image: {fileID: 0}
+  name: Slippy Soap
+  description: 'CHANGES CONTROLS: makes character movement slippery'
+  image: {fileID: -1402469804, guid: b7f2a70383d1c28488fce4bf294b0127, type: 3}
   healthModifier: 0
   maxHealthModfier: 0
   cooldownModifier: 0
@@ -22,4 +22,5 @@ MonoBehaviour:
   dashCooldownSpeedModifier: 0
   dashSpeedModifier: 0
   corruptionModifier: 0
-  rarity: 100
+  rarity: 50
+  specialEffect: 1

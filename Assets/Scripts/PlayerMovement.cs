@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         activeMoveSpeed = MainManager.Instance.moveSpeed;
-        Debug.Log(eyeSprite.sprite.ToString());
         eyeSprite.sprite = eyes[0];
         eyeSprite.size = new Vector2(100, 2);
     }
