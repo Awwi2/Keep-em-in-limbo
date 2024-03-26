@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealthNugget
   m_EditorClassIdentifier: 
   name: Health nugget
-  description: Restores 1 HP
+  description: +1 HP
   image: {fileID: 1380669298, guid: b7f2a70383d1c28488fce4bf294b0127, type: 3}
   healthModifier: 1
   maxHealthModfier: 0

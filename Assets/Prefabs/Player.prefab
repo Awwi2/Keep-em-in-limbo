@@ -187,9 +187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1005919202079894881}
-  dashcollider: {fileID: 2022511173978475956}
-  NormalCollider: {fileID: 5475254718327792205}
-  dashLength: 0.5
+  dashCollider: {fileID: 5475254718327792205}
+  normalCollider: {fileID: 2022511173978475956}
+  dashLength: 0.25
   dashCounter: 0
   eyeSprite: {fileID: 8336173963213303809}
   slipperySpeedModifier: 0.01

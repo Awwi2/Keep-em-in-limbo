@@ -7610,7 +7610,7 @@ MonoBehaviour:
   dashCooldownSpeed: 0.75
   dashSpeed: 20
   corruption: 0
-  isSlip: 1
+  isSlip: 0
   Layer: -1
   layerSizes:
   - {x: -1, y: -1}
@@ -7848,7 +7848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2176275941067257484, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
       propertyPath: dashLength
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2176275941067257484, guid: 90caa7065ee88594dba9ac595d7e1a44, type: 3}
       propertyPath: NormalCollider

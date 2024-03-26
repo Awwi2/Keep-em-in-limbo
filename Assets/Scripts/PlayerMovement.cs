@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] BoxCollider2D dashcollider;
-    [SerializeField] BoxCollider2D NormalCollider;
+    [SerializeField] BoxCollider2D dashCollider;
+    [SerializeField] BoxCollider2D normalCollider;
 
     Vector2 movement;
 
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (MainManager.Instance.isSlip)
             {
-                rb.velocity += movement * activeMoveSpeed * slipperySpeedModifier;
+                rb.velocity += movement * activeMoveSpeed * slipperySpeedModifier * Time.deltaTime * 600;
 
                 if (rb.velocity.x > slipSpeedCap && dashCounter <= 0)
                 {
@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                rb.velocity = movement * activeMoveSpeed;
+                rb.velocity = movement * activeMoveSpeed * Time.deltaTime * 600;
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -88,8 +88,8 @@ public class PlayerMovement : MonoBehaviour
                 {
                     //Player is dashing
                     eyeSprite.sprite = eyes[1];
-                    NormalCollider.enabled = false;
-                    dashcollider.enabled = true;
+                    normalCollider.enabled = false;
+                    dashCollider.enabled = true;
                     gameObject.GetComponent<Animator>().SetBool("Dashing", true);
                     activeMoveSpeed = MainManager.Instance.dashSpeed;
                     dashCounter = dashLength;
@@ -106,8 +106,8 @@ public class PlayerMovement : MonoBehaviour
                     eyeSprite.sprite = eyes[2];
                     dashCounter = 0;
                     gameObject.GetComponent<Animator>().SetBool("Dashing", false);
-                    NormalCollider.enabled = true;
-                    dashcollider.enabled = false;
+                    normalCollider.enabled = true;
+                    dashCollider.enabled = false;
                     activeMoveSpeed = MainManager.Instance.moveSpeed * MainManager.Instance.dashCooldownSpeed;
                     dashCoolCounter = MainManager.Instance.dashCooldown;
                 }
