@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
 public class HeartOverlay : MonoBehaviour
 {
+    private Canvas Canvas;
     private int maxHeartsbefore;
     public Sprite fullHeart;
     public Sprite emptyHeart;
@@ -34,7 +37,15 @@ public class HeartOverlay : MonoBehaviour
         maxHeartsbefore = MM.maxHealth;
         NumOfHearts = hearts.Length;
         InitializeHearts();
+        UnityEngine.SceneManagement.SceneManager.activeSceneChanged += SceneChanged;
+        Canvas = this.GetComponent<Canvas>();
     }
+
+    private void SceneChanged(Scene arg0, Scene arg1)
+    {
+        Canvas.worldCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+    }
+
     private void Update()
     {
         if ((MM.maxHealth != maxHeartsbefore) && (MM.maxHealth <= NumOfHearts))
